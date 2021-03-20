@@ -1,0 +1,60 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:10.5
+    restart: always
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=spitfire
+      - PGDATA=/tmp
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    networks:
+      - backend
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./Backend/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./Backend/sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      - ./Backend/postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    image: spitfire
+    restart: always
+    build: .
+    environment: 
+      - TEST_STRING=Testing.1..2...3
+      - VERSION_NUMBER=1.0.0
+      - DATABASE_NAME=spitfire
+      - DATABASE_USER=postgres
+      - DATABASE_PASS=postgres
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+    depends_on: 
+      db:
+        condition: service_healthy
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+
+  web-cli:
+    image: spitfire
+    depends_on: 
+      db:
+        condition: service_healthy
+    networks:
+      - backend
+    command: sh
+
+networks:
+  backend:
+    driver: bridge
