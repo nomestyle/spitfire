@@ -55,7 +55,7 @@ services:
       - backend
     command: sh
 
- networks:
-   backend:
-     driver: bridge
+networks:
+  backend:
+    driver: bridge
 
