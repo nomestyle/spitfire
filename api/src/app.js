@@ -65,6 +65,14 @@ const options = {
                             $ref: '#/components/schemas/Note'
                         }
                     },
+                    NoteContent: {
+                        type: 'object',
+                        properties: {
+                            noteContent: {
+                                type: 'text'
+                            },
+                        }
+                    },
                     Customer: {
                         type: 'object',
                         properties: {

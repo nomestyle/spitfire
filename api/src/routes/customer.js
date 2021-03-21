@@ -36,7 +36,7 @@ router.get('/', getCustomers);
  * /customer/Id/:id:
  *   get:
  *     description: return customer by using id
- *      parameters:
+ *     parameters:
  *       - in: path
  *         name: id
  *         required: true
@@ -66,7 +66,7 @@ router.get('/Id/:id', getCustomerById);
  * /customer/Identifier/:identifier:
  *   get:
  *     description: return customer by using identifier
- *      parameters:
+ *     parameters:
  *       - in: path
  *         name: identifier
  *         required: true
