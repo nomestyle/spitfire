@@ -36,9 +36,11 @@ Both these methods are included in separate scripts.
 Backend (PostgreSQL DB) 2.5 hours - this is slightly longer due to the fact Windows 10 has a few issues with postgres on docker persisting:
 https://dotnetninja.net/2020/02/running-postgresql-in-a-container-on-windows-10/
 In production circumstances, the database would be hosted either on the cloud (Azure/aws) or onsite servers.
-API (expressJS) 10 hours - This included docker setup, initial express, getting sequelize behaving properly, finally being able to create the endpoints and the tests.
+API (expressJS) 13 hours - This included docker setup, initial express, getting sequelize behaving properly, finally being able to create the endpoints and the tests.
 
 ### Notes about time ###
 With more time I would have researched my stack choice, I normally do my APIs in PHP (symfony) which has the whole ORM entinty on point.
 I didn't realize the options I had for expressJS ORM were as problematic as I found it was. ExpressJS was chosen for speed and ease to write but, honestly it's been anything but easy.
+I still need to fix a docker-compose CI network issue, as it won't build on git actions.
+I also still need all the propertests, right now its only to test the end points work.
 

@@ -12,8 +12,8 @@ services:
       options:
         max-size: 10m
         max-file: "3"
-    #networks:
-    #  - backend
+     networks:
+       - backend
     ports:
       - '5432:5432'
     volumes:
@@ -41,8 +41,8 @@ services:
     depends_on: 
       db:
         condition: service_healthy
-    #networks:
-    #  - backend
+     networks:
+       - backend
     ports:
       - "3000:3000"
 
@@ -51,10 +51,11 @@ services:
     depends_on: 
       db:
         condition: service_healthy
-    #networks:
-    #  - backend
+     networks:
+       - backend
     command: sh
 
-#networks:
- # backend:
-   # driver: bridge
+ networks:
+   backend:
+     driver: bridge
+

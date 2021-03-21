@@ -30,6 +30,13 @@ const options = {
         },
         components: {
                 schemas: {
+                    Success: {
+                        type: 'array',
+                        items: {
+                            type: 'integer',
+                            format: 'int32'
+                        }
+                    },
                     Note: {
                         type: 'object',
                         properties: {
