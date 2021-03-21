@@ -29,11 +29,11 @@ const router = express.Router()
  *                      $ref: '#/components/schemas/Error'
  *
  */
-router.get('/customer', getCustomers);
+router.get('/', getCustomers);
 
 /**
  * @openapi
- * /customerById/:id:
+ * /customer/Id/:id:
  *   get:
  *     description: return customer by using id
  *     responses:
@@ -55,9 +55,9 @@ router.get('/Id/:id', getCustomerById);
 
 /**
  * @openapi
- * /Identifier/:identifier:
+ * /customer/Identifier/:identifier:
  *   get:
- *      description: return customer by using identifier
+ *     description: return customer by using identifier
  *     responses:
  *       200:
  *         description: customer object
@@ -77,7 +77,7 @@ router.get('/Identifier/:identifier', getCustomerByIdentifier);
 
 /**
  * @openapi
- * /customers/sort/:direction/by/:property:
+ * /customer/sort/:direction/by/:property:
  *   get:
  *     description: sort all customers based on direction('ASC' or 'DESC') of a property
  *     responses:
@@ -99,7 +99,7 @@ router.get('/sort/:direction/by/:property', getCustomersSort);
 
 /**
  * @openapi
- * /customers/sort/:direction/by/:property/status/:stat:
+ * /customer/sort/:direction/by/:property/status/:stat:
  *   get:
  *     description: returns all customers based on status
  *     responses:
@@ -121,7 +121,7 @@ router.get('/sort/:direction/by/:property/status/:stat', getCustomersFilteredByS
 
 /**
  * @openapi
- * /customer/sort/:direction/by/:property/:filter/:value:
+ * /customer/sort/:direction/by/:property/filter/:filter/:value:
  *   get:
  *     description: returns all customers based on filter values
  *     responses:
@@ -139,19 +139,22 @@ router.get('/sort/:direction/by/:property/status/:stat', getCustomersFilteredByS
  *                      $ref: '#/components/schemas/Error'
  *
  */
-router.get('/sort/:direction/by/:property/:filter/:value', getCustomersFiltered);
+router.get('/sort/:direction/by/:property/filter/:filter/:value', getCustomersFiltered);
 
 /**
  * @openapi
- *  /customer/:identifier/updatestatus/:status:
- *      get:
- *          description: update status
- *          responses:
- *              200:
- *                  description: Returns a count of successful updates
- *                  $ref: '#/components/schemas/Customer'
- *              500:
- *                  description: Unexpected Error
+ * /customer/:identifier/updatestatus/:status:
+ *  put:
+ *      description: update status
+ *      responses:
+ *          200:
+ *              description: Returns [1] if successful, [0] if no record found.
+ *              content:
+ *                  application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Success'
+ *          500:
+ *              description: Unexpected Error
  *              content:
  *                  application/json:
  *                      schema:

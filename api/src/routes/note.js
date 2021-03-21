@@ -5,51 +5,90 @@ const router = express.Router()
 
 /**
  * @openapi
- *   /note/customer/:identifier:
- *   get:
+ * /note/customer/:identifier:
+ *  get:
  *     description: get all the notes for a customer
- *     parameters:
- *          identifier:
- *              in: path
- *              required: true
- *              schema:
- *                  type: string
+ *     parameter:
+ *       identifier:
+ *          description: customer identifier
+ *          type: string
+ *          in: path
  *     responses:
  *       200:
  *         description: Returns an array of notes.
+ *         content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Notes'
+ *       500:
+ *          description: Unexpected Error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Error'
  */
 router.get('/customer/:identifier', getCustomerNotes);
 
 /**
  * @openapi
  * /note/addto/:identifier:
- *   post:
+ *  post:
  *     description: add Note to customer identify
  *     responses:
  *       200:
- *         description: Returns success.
+ *         description: Returns [1] if successful, [0] if no record found.
+ *         content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Success'
+ *       500:
+ *          description: Unexpected Error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Error'
  */
 router.post('/addto/:identifier', postCustomerNote);
 
 /**
-* @openapi
-* /note/edit/:id:
-    *   post:
-    *     description: edit Note content
-*     responses:
-*       200:
-*         description: Returns success.
+ * @openapi
+ * /note/edit/:id:
+ *   put:
+ *      description: edit Note content
+ *      responses:
+ *       200:
+ *         description: Returns [1] if successful, [0] if no record found.
+ *         content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Success'
+ *      500:
+ *          description: Unexpected Error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Error'
 */
 router.put('/edit/:id', putCustomerNote);
 
 /**
  * @openapi
  * /note/delete/:id:
- *   post:
- *     description: edit Note content
+ *   delete:
+ *     description: delete Note
  *     responses:
  *       200:
- *         description: Returns success.
+ *         description: Returns [1] if successful, [0] if no record found.
+ *         content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Success'
+ *       500:
+ *          description: Unexpected Error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Error'
  */
 router.delete('/delete/:id', deleteCustomerNote);
 
