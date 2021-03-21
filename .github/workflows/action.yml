@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ develop ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -24,12 +24,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      #hopefully creates the network
+      - name: Create docker network 🖧
+        run: docker network create backend
 
-      # Runs a single command using the runners shell
+      # Runs the docker build functionality
       - name: Build Docker
         run: docker-compose build
 
-      # Runs a set of commands using the runners shell
+      # puts the stack up
       - name: Run docker
         run: docker-compose up -d
-          echo test, and deploy your project.
