@@ -8,11 +8,13 @@ const router = express.Router()
  * /note/customer/:identifier:
  *  get:
  *     description: get all the notes for a customer
- *     parameter:
- *       identifier:
- *          description: customer identifier
- *          type: string
- *          in: path
+ *     parameters:
+ *       - in: path
+ *         name: identifier
+ *         required: true
+ *         description: identifier string of customer.
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Returns an array of notes.
@@ -34,6 +36,19 @@ router.get('/customer/:identifier', getCustomerNotes);
  * /note/addto/:identifier:
  *  post:
  *     description: add Note to customer identify
+ *     parameters:
+ *       - in: path
+ *         name: identifier
+ *         required: true
+ *         description: identifier string of customer.
+ *         schema:
+ *           type: string
+ *       - in:
+ *         name: body
+ *         required: true
+ *         description: note Content.
+ *         schema:
+ *           $ref: '#/components/schemas/NoteContent'
  *     responses:
  *       200:
  *         description: Returns [1] if successful, [0] if no record found.
@@ -55,6 +70,20 @@ router.post('/addto/:identifier', postCustomerNote);
  * /note/edit/:id:
  *   put:
  *      description: edit Note content
+ *      parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: id of note to edit.
+ *         schema:
+ *           type: integer
+ *           format: int32
+ *       - in:
+ *         name: body
+ *         required: true
+ *         description: note Content.
+ *         schema:
+ *           $ref: '#/components/schemas/NoteContent'
  *      responses:
  *       200:
  *         description: Returns [1] if successful, [0] if no record found.
@@ -76,6 +105,14 @@ router.put('/edit/:id', putCustomerNote);
  * /note/delete/:id:
  *   delete:
  *     description: delete Note
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: id of note to delete.
+ *         schema:
+ *           type: integer
+ *           format: int32
  *     responses:
  *       200:
  *         description: Returns [1] if successful, [0] if no record found.

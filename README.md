@@ -43,5 +43,4 @@ With more time I would have researched my stack choice, I normally do my APIs in
 I didn't realize the options I had for expressJS ORM were as problematic as I found it was. ExpressJS was chosen for speed and ease to write but, honestly it's been anything but easy.
 I still need to fix a docker-compose CI network issue, as it won't build on git actions.
 I also still need all the propertests, right now its only to test the end points work.
-Swagger is missing parameters (what I thought was correct was not).
 
